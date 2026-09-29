@@ -10,7 +10,7 @@ import os.log
 
 enum HelperConstants {
     /// The launchd plist filename in Contents/Library/LaunchDaemons/.
-    static let daemonPlistName = "io.ugfugl.glimmer.helper.plist"
+    static let daemonPlistName = "io.chuoen7.glimmer.helper.plist"
 }
 
 // MARK: - Single-resume continuation guard

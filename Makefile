@@ -100,7 +100,7 @@ export SPARKLE_VERSION
 # Contents/Library/LaunchDaemons/, where SMAppService.daemon loads it. Signed
 # inside-out (its own block in scripts/sign-bundle.sh, hardened runtime, no
 # entitlements) before the app's outer seal.
-HELPER_LABEL  := io.ugfugl.glimmer.helper
+HELPER_LABEL  := io.chuoen7.glimmer.helper
 HELPER_SRCS   := helper/Protocol.swift helper/AWDLSuppressor.swift helper/HelperService.swift helper/main.swift
 HELPER_PLIST  := helper/$(HELPER_LABEL).plist
 HELPER_BIN    := $(DERIVED)/$(HELPER_LABEL)
@@ -222,6 +222,8 @@ helper-build: $(HELPER_BIN)
 # daemon inside-out). install(1) overwrites cleanly on every rebuild.
 embed-helper: app $(HELPER_BIN)
 	@echo "▶ Embedding AWDL helper into the app bundle..."
+	@rm -f "$(GLIMMER_APP_SRC)/Contents/MacOS/io.ugfugl.glimmer.helper" \
+		"$(GLIMMER_APP_SRC)/Contents/Library/LaunchDaemons/io.ugfugl.glimmer.helper.plist"
 	@install -m 0755 "$(HELPER_BIN)" "$(GLIMMER_APP_SRC)/Contents/MacOS/$(HELPER_LABEL)"
 	@mkdir -p "$(GLIMMER_APP_SRC)/Contents/Library/LaunchDaemons"
 	@install -m 0644 "$(HELPER_PLIST)" "$(GLIMMER_APP_SRC)/Contents/Library/LaunchDaemons/$(HELPER_LABEL).plist"

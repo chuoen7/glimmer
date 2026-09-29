@@ -3,12 +3,11 @@ import Foundation
 final class HelperService: NSObject, NSXPCListenerDelegate, GlimmerHelperProtocol {
     private let suppressor: AWDLSuppressor
 
-    // Every XPC peer must be our bundle id AND Apple-anchored Developer ID (Team
-    // 5T7M4RH3F8). main.swift hands this to the listener, so the OS rejects any
-    // other process before it can reach this root helper.
+    // Accept only this fork signed by our Apple-issued identity.
+    // The listener rejects other peers before they can reach the root helper.
     static let designatedRequirement =
-        "identifier \"io.ugfugl.Glimmer\" and anchor apple generic "
-        + "and certificate leaf[subject.OU] = \"5T7M4RH3F8\""
+        "identifier \"io.chuoen7.Glimmer\" and anchor apple generic "
+        + "and certificate leaf[subject.OU] = \"YVHCGUC9P4\""
 
     init(suppressor: AWDLSuppressor) {
         self.suppressor = suppressor

@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>io.ugfugl.glimmer.helper</string>
+    <string>io.chuoen7.glimmer.helper</string>
     <!-- Path within Glimmer.app to the daemon binary (SMAppService.daemon convention). -->
     <key>BundleProgram</key>
-    <string>Contents/MacOS/io.ugfugl.glimmer.helper</string>
+    <string>Contents/MacOS/io.chuoen7.glimmer.helper</string>
     <!-- launchd starts the daemon on-demand when the app connects to this service;
          SMAppService manages the lifecycle, so no RunAtLoad/KeepAlive/ProcessType. -->
     <key>MachServices</key>
     <dict>
-        <key>io.ugfugl.glimmer.helper</key>
+        <key>io.chuoen7.glimmer.helper</key>
         <true/>
     </dict>
     <!-- Groups the daemon under the app in System Settings > Login Items & Extensions. -->
     <key>AssociatedBundleIdentifiers</key>
     <array>
-        <string>io.ugfugl.Glimmer</string>
+        <string>io.chuoen7.Glimmer</string>
     </array>
 </dict>
 </plist>

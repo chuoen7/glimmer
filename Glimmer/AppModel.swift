@@ -275,6 +275,9 @@ final class AppModel {
     var streamCoversNotch: Bool = true {
         didSet { UserDefaults.standard.set(streamCoversNotch, forKey: "streamCoversNotch") }
     }
+    var streamUsesFullScreenSpace: Bool = false {
+        didSet { UserDefaults.standard.set(streamUsesFullScreenSpace, forKey: "streamUsesFullScreenSpace") }
+    }
     /// The Custom preset's "Show the stream in a window" choice: full screen
     /// (the default) or a normal titled window at Custom's own resolution,
     /// refresh, bitrate and HDR. Only in force under Custom (see
@@ -507,6 +510,7 @@ final class AppModel {
         streamHDR = Self.persistedBool("streamHDR") ?? streamHDR
         captureSysKeys = Self.persistedBool("captureSysKeys") ?? captureSysKeys
         streamCoversNotch = Self.persistedBool("streamCoversNotch") ?? streamCoversNotch
+        streamUsesFullScreenSpace = Self.persistedBool("streamUsesFullScreenSpace") ?? streamUsesFullScreenSpace
         // Registered default (GlimmerApp) answers the absent-key case; an
         // unrecognised raw value lands on the default rather than guessing.
         streamDisplayMode = StreamDisplayMode.persisted(

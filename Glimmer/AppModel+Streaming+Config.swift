@@ -231,9 +231,7 @@ extension AppModel {
                                fps: effectiveFPS, bitrateKbps: effectiveBitrateKbps)
         cfg.captureSysKeys = captureSysKeys
         cfg.playAudioOnHost = muteMacWhileStreaming
-        // The notch choice only means something on a notched panel; elsewhere
-        // the session always takes the borderless cover (see
-        // effectiveStreamCoversNotch for the issue this closes).
+        // The full-screen choice picks the existing Space or borderless path.
         cfg.coversNotch = effectiveStreamCoversNotch
         cfg.displayMode = effectiveDisplayMode
         cfg.videoFormats = offeredVideoFormats(for: host)

@@ -253,23 +253,16 @@ extension AppModel {
         return "\(Self.resolutionLabel(width: display.width, height: display.height)) · \(display.fps) Hz"
     }
 
-    /// Whether the display the stream would open on has a camera notch
-    /// (`safeAreaInsets.top > 0`). "Fill the notch" is only shown - and only
-    /// consulted - when this is true: on a notchless panel the toggle used to
-    /// silently switch the fullscreen MECHANISM (borderless cover vs a macOS
-    /// Space), which is how a Mac mini user landed in the vanishing-window
-    /// Space path of issue #84. Same `displayInfoRevision` tracking edge as
-    /// `currentDisplayDescription`, since NSScreen.main is a global.
+    /// Whether the display the stream would open on has a camera notch.
+    /// Same display revision tracking as `currentDisplayDescription`.
     var currentDisplayHasNotch: Bool {
         _ = displayInfoRevision
         return (NSScreen.main?.safeAreaInsets.top ?? 0) > 0
     }
 
-    /// The notch choice the session actually gets: the user's persisted toggle
-    /// on a notched panel, always "cover" (Path A) elsewhere. The persisted
-    /// value is kept untouched for when a notched panel is present again.
+    /// Each display type keeps its own full-screen choice.
     var effectiveStreamCoversNotch: Bool {
-        currentDisplayHasNotch ? streamCoversNotch : true
+        currentDisplayHasNotch ? streamCoversNotch : !streamUsesFullScreenSpace
     }
 
     /// The panel's CURRENT refresh (`NSScreen.maximumFramesPerSecond` reflects

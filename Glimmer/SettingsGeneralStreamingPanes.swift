@@ -311,18 +311,24 @@ struct QualityPane: View {
                 Text("Brighter highlights and deeper color when the PC and this display both support HDR.")
             }
 
-            // Shown only on a notched panel for a full-screen stream: elsewhere the
-            // toggle used to silently switch the fullscreen mechanism to a macOS
-            // Space (issue #84). Default off: covering the whole panel is the stance.
-            if model.currentDisplayHasNotch, model.effectiveDisplayMode == .fullScreen {
-                Section {
-                    Toggle("Keep picture below the camera", isOn: Binding(
-                        get: { !model.streamCoversNotch }, set: { model.streamCoversNotch = !$0 }))
-                        .toggleStyle(.switch)
-                        .help("Uses a macOS full-screen space that stops short of the notch. "
-                            + "Off covers the whole panel, so a panel-native stream renders 1:1.")
-                } footer: {
-                    Text("Off, a thin strip of the picture hides behind the notch.")
+            if model.effectiveDisplayMode == .fullScreen {
+                if model.currentDisplayHasNotch {
+                    Section {
+                        Toggle("Keep picture below the camera", isOn: Binding(
+                            get: { !model.streamCoversNotch }, set: { model.streamCoversNotch = !$0 }))
+                            .toggleStyle(.switch)
+                            .help("Uses a macOS full-screen space that stops short of the notch. "
+                                + "Off covers the whole panel, so a panel-native stream renders 1:1.")
+                    } footer: {
+                        Text("Off, a thin strip of the picture hides behind the notch.")
+                    }
+                } else {
+                    Section {
+                        Toggle("Use a full-screen Space", isOn: $model.streamUsesFullScreenSpace)
+                            .toggleStyle(.switch)
+                    } footer: {
+                        Text("Opens the stream in a separate macOS Space.")
+                    }
                 }
             }
 
